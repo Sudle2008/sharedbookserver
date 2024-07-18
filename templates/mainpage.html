@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <header id="header"></header>
+
+
+
+
+    <footer id="footer"></footer>
+
+    <script>
+        {% if username == "" %}
+        $("#header").load("/static/html/header0.html");
+        {% else %}
+        $("#header").load("/static/html/header1.html");
+        {% endif %}
+        $("#footer").load("/static/html/footer.html");
+    </script>
+
+</body>
+</html>

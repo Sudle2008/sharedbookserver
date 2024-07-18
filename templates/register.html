@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    
+
+</head>
+<body>
+    <script type="text/javascript">
+    function checkpassword() {
+        var password = document.getElementById("password").value;
+        var repassword = document.getElementById("password_check").value;
+
+        if (password == repassword) {
+            document.getElementById("tishi").innerHTML = "<br/><font color='green'>两次密码输入一致</font>";
+            document.getElementById("submit").disabled = false;
+
+        } else {
+            document.getElementById("tishi").innerHTML = "<br/><font color='red'>两次输入密码不一致!</font>";
+            document.getElementById("submit").disabled = true;
+        }
+    }
+    </script>
+    <div id="warning"><font color="red">{{ warning }}</font></div>
+
+    <form name="register" action="/register/" method="post" style="text-align: center;">
+        <label for="name">用户名:</label>
+        <input type="text" id="name" name="name" required>
+        <br />
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required>
+        <br />
+        <label for="password_check">确认密码:</label>
+        <input type="password" id="password_check" name="password_check" onkeyup="checkpassword()" required>
+        <span id="tishi"></span>
+
+        <br /><input type="submit" id="submit" value="注册">
+
+    </form>
+
+    <p>已有账号？<a href="/login/">点我登录</a></p>
+</body>
+</html>
