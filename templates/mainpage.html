@@ -14,10 +14,10 @@
     <footer id="footer"></footer>
 
     <script>
-        {% if acc == 0 %}
-        $("#header").load("/static/html/header0.html");
-        {% else %}
+        {% if acc == "1" %}
         $("#header").load("/static/html/header1.html");
+        {% else %}
+        $("#header").load("/static/html/header0.html");
         {% endif %}
         $("#footer").load("/static/html/footer.html");
     </script>

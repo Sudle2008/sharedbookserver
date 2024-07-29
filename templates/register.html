@@ -4,27 +4,30 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 
 
-    
 
 </head>
 <body>
     <script type="text/javascript">
-    function checkpassword() {
-        var password = document.getElementById("password").value;
-        var repassword = document.getElementById("password_check").value;
+        function checkpassword() {
+            var password = document.getElementById("password").value;
+            var repassword = document.getElementById("password_check").value;
 
-        if (password == repassword) {
-            document.getElementById("tishi").innerHTML = "<br/><font color='green'>两次密码输入一致</font>";
-            document.getElementById("submit").disabled = false;
+            if (password == repassword) {
+                document.getElementById("tishi").innerHTML = "<br/><font color='green'>两次密码输入一致</font>";
+                document.getElementById("submit").disabled = false;
 
-        } else {
-            document.getElementById("tishi").innerHTML = "<br/><font color='red'>两次输入密码不一致!</font>";
-            document.getElementById("submit").disabled = true;
+            } else {
+                document.getElementById("tishi").innerHTML = "<br/><font color='red'>两次输入密码不一致!</font>";
+                document.getElementById("submit").disabled = true;
+            }
         }
-    }
     </script>
+
+    <header id="header"></header>
+
     <div id="warning"><font color="red">{{ warning }}</font></div>
 
     <form name="register" action="/register/" method="post" style="text-align: center;">
@@ -43,5 +46,16 @@
     </form>
 
     <p>已有账号？<a href="/login/">点我登录</a></p>
+
+    <footer id="footer"></footer>
+
+    <script>
+        {% if acc == "1" %}
+        $("#header").load("/static/html/header1.html");
+        {% else %}
+        $("#header").load("/static/html/header0.html");
+        {% endif %}
+        $("#footer").load("/static/html/footer.html");
+    </script>
 </body>
 </html>

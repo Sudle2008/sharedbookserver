@@ -4,8 +4,36 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 
+    <header id="header"></header>
+
+    <div id="warning"><font color="red">{{ warning }}</font></div>
+
+    <form name="login" action="/login/" method="post" style="text-align: center;">
+        <label for="name">用户名:</label>
+        <input type="text" id="name" name="name" required>
+        <br />
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required>
+        <br />
+        <input type="submit" id="submit" value="注册">
+
+    </form>
+
+    <p>没有账号？<a href="/register/">点我注册</a></p>
+
+    <footer id="footer"></footer>
+
+    <script>
+        {% if acc == "1" %}
+        $("#header").load("/static/html/header1.html");
+        {% else %}
+        $("#header").load("/static/html/header0.html");
+        {% endif %}
+        $("#footer").load("/static/html/footer.html");
+    </script>
 </body>
 </html>
