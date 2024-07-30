@@ -8,7 +8,18 @@
 <body>
     <header id="header"></header>
 
+    <div id="main">
+        <h1>欢迎登录书籍共享平台</h1><br />
+        {% if acc == "1" %}
+        <p>{{username}}，你好。欢迎<a href="/book/add/">添加书籍</a></p><br />
+        {% else %}
+        <p>添加书籍，请先<a href="/login">登录</a></p><br />
+        {% endif %}
 
+        <p></p>
+
+
+    </div>
 
 
     <footer id="footer"></footer>

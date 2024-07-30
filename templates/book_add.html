@@ -1,0 +1,30 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <header id="header"></header>
+
+    <form id="add_book" name="add_book" method="get" action="/book/add/">
+
+        <p>书名：<input id="bookname" name="bookname" type="text" required /></p>  <!--用户名文本框-->
+        <p>地点：<input id="place" name="place" type="text" required /></p>                     <!--密码文本框-->
+        <p><input id="submit" type="submit" value="提交" /></p><!--提交按钮-->
+
+
+    </form>
+
+
+    <footer id="footer"></footer>
+
+    <script>
+        $("#header").load("/static/html/header1.html");
+        $("#footer").load("/static/html/footer.html");
+    </script>
+</body>
+</html>

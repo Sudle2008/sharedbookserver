@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <header id="header"></header>
+
+    <h2><a href="/book/add/">点我添加书籍</a></h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>书名</th>
+                <th>地点</th>
+                <th>是否消毒</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in book_list %}
+            <tr>
+                <td>{{data[0]}}</td>
+                <td>{{data[1]}}</td>
+                {% if data[2] == 0 %}
+                <td>未消毒</td>
+                {% else %}
+                <td>已消毒</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <footer id="footer"></footer>
+
+    <script>
+        {% if acc == "1" %}
+        $("#header").load("/static/html/header1.html");
+        {% else %}
+        $("#header").load("/static/html/header0.html");
+        {% endif %}
+        $("#footer").load("/static/html/footer.html");
+    </script>
+</body>
+</html>

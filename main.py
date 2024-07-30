@@ -2,6 +2,7 @@
 
 from flask import Flask,render_template,make_response,request,redirect
 import source.user as database_user
+import source.book as database_book
 
 app = Flask(__name__)
 
@@ -75,6 +76,29 @@ def logout():
     res.delete_cookie("username")
     res.delete_cookie("password")
     return res
+
+@app.route("/book/")
+def book():
+    acc=request.cookies.get('acc')
+    book_list=database_book.list_all()
+    return render_template('book.html',book_list=book_list,acc=acc)
+    
+@app.route("/book/add/")
+def book_add():
+    acc=request.cookies.get('acc')
+    if acc=="1":
+        username=request.cookies.get('username')
+        bookname=request.values.get("bookname")
+        place=request.values.get("place")
+        print(bookname)
+        if (not bookname) or (not place):
+            return render_template('book_add.html')
+        if database_book.add_book(bookname,place,username):
+            return '''添加成功，<a href="/book/add/">点我继续添加</a>,<a href="/book/">点我返回书籍页面</a>。'''
+        else:
+            return '''未知错误，<a href="javascript:location.reload()">点我重试</a>,<a href="/book/">点我返回书籍页面</a>。'''
+    else:
+        return '''请先<a href="/login/">登录</a>。'''
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")#添加参数以共享至局域网内

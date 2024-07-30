@@ -1,7 +1,5 @@
 import sqlite3
 
-user_data=sqlite3.connect('./database/user.db')
-
 def check_user(name,password):
     user_data=sqlite3.connect('./database/user.db')
     cursor=user_data.cursor()
