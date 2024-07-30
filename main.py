@@ -99,6 +99,35 @@ def book_add():
             return '''未知错误，<a href="javascript:location.reload()">点我重试</a>,<a href="/book/">点我返回书籍页面</a>。'''
     else:
         return '''请先<a href="/login/">登录</a>。'''
+    
+@app.route("/book/delete/")
+def book_delete():
+    acc="1"
+    try:
+        username=request.cookies.get('username')
+        password=request.cookies.get('password')
+        status=database_user.check_user(username,password)
+        if status==1:
+            database_book.delete_book(request.values.get("id"),username)
+        elif status==0:
+            raise Exception("Wrong User")
+        else:
+            raise Exception("UNKNOWN WRONG")
+    except:
+        acc="0"
+        username="EMPTY"
+        password="EMPTY"
+        return '''请重新<a href="/login/">登录</a>。'''
+
+@app.route("/person/")
+def person():
+    acc=request.cookies.get('acc')
+    if acc=="1":
+        username=request.cookies.get('username')
+        book_list=database_book.list_all(user=username)
+        return render_template('person.html',username=username,book_list=book_list)
+    else:
+        return '''请先<a href="/login/">登录</a>。'''
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")#添加参数以共享至局域网内

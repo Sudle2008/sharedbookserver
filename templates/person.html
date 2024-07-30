@@ -1,0 +1,47 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <header id="header"></header>
+
+    <p>您好，{{username}}，您可以在下方管理您上传的书</p><br />
+
+    <table>
+        <thead>
+            <tr>
+                <th>书名</th>
+                <th>地点</th>
+                <th>是否消毒</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in book_list %}
+            <tr>
+                <td>{{data[0]}}</td>
+                <td>{{data[1]}}</td>
+                {% if data[2] == 0 %}
+                <td>未消毒</td>
+                {% else %}
+                <td>已消毒</td>
+                {% endif %}
+                <td><a href="/book/delete?id={{data[4]}}">删除</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <footer id="footer"></footer>
+
+    <script>
+        $("#header").load("/static/html/header1.html");
+        $("#footer").load("/static/html/footer.html");
+    </script>
+</body>
+</html>
