@@ -103,12 +103,15 @@ def book_add():
 @app.route("/book/delete/")
 def book_delete():
     acc="1"
+    book_id=request.values.get("id")
+    if not book_id:
+        return '''未选择删除书籍，<a href="/">返回首页</a>。'''
     try:
         username=request.cookies.get('username')
         password=request.cookies.get('password')
         status=database_user.check_user(username,password)
         if status==1:
-            database_book.delete_book(request.values.get("id"),username)
+            database_book.delete_book(book_id,username)
         elif status==0:
             raise Exception("Wrong User")
         else:
