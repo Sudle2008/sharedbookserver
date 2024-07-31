@@ -90,13 +90,12 @@ def book_add():
         username=request.cookies.get('username')
         bookname=request.values.get("bookname")
         place=request.values.get("place")
-        print(bookname)
         if (not bookname) or (not place):
             return render_template('book_add.html')
         if database_book.add_book(bookname,place,username):
-            return '''添加成功，<a href="/book/add/">点我继续添加</a>,<a href="/book/">点我返回书籍页面</a>。'''
+            return '''添加成功， <a href="/book/add/">点我继续添加</a>,  <a href="/book/">点我返回书籍页面</a>。'''
         else:
-            return '''未知错误，<a href="javascript:location.reload()">点我重试</a>,<a href="/book/">点我返回书籍页面</a>。'''
+            return '''未知错误， <a href="javascript:location.reload()">点我重试</a>,  <a href="/book/">点我返回书籍页面</a>。'''
     else:
         return '''请先<a href="/login/">登录</a>。'''
     
@@ -110,16 +109,43 @@ def book_delete():
         username=request.cookies.get('username')
         password=request.cookies.get('password')
         status=database_user.check_user(username,password)
+        print(status)
         if status==1:
-            database_book.delete_book(book_id,username)
+            if database_book.delete_book(book_id,username):
+                return '''删除成功，请关闭此标签页'''
+            else:
+                return '''删除失败，可能原因：<br/>1、您尝试删除他人书籍<br/>2、书籍已经删除<br/>3、未知原因，请联系管理员'''
         elif status==0:
             raise Exception("Wrong User")
         else:
             raise Exception("UNKNOWN WRONG")
     except:
-        acc="0"
-        username="EMPTY"
-        password="EMPTY"
+        return '''请重新<a href="/login/">登录</a>。'''
+    
+@app.route("/book/clean/")
+def book_clean():
+    acc="1"
+    book_id=request.values.get("id")
+    clean=request.values.get("to")
+    if not book_id:
+        return '''未选择书籍，<a href="/">返回首页</a>。'''
+    if not clean:
+        return '''未选择更改状态，<a href="/">返回首页</a>。'''
+    try:
+        username=request.cookies.get('username')
+        password=request.cookies.get('password')
+        status=database_user.check_user(username,password)
+        print(status)
+        if status==1:
+            if database_book.clean_change(book_id,clean,username):
+                return '''消毒状态更改成功，请关闭此标签页'''
+            else:
+                return '''状态更改失败，未知原因，请联系管理员'''
+        elif status==0:
+            raise Exception("Wrong User")
+        else:
+            raise Exception("UNKNOWN WRONG")
+    except:
         return '''请重新<a href="/login/">登录</a>。'''
 
 @app.route("/person/")

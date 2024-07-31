@@ -14,8 +14,10 @@ def add_book(name,place,user):
     book_data=sqlite3.connect('./database/book.db')
     cursor=book_data.cursor()
     try:
-        cursor.execute("insert into book (name,place,clean,user) values ("+name+","+place+",0,"+user+")")
+        cursor.execute("insert into book (name,place,clean,user) values ('"+name+"','"+place+"',0,'"+user+"')")
+        print(777)
         book_data.commit()
+        print(888)
         cursor.close()
         return 1
     except:
@@ -34,5 +36,28 @@ def list_all(name='%',user='%',clean=-1):
     cursor.close()
     return res
     
-def delete_book(id,user):
-    pass
+def delete_book(book_id,user):
+    book_data=sqlite3.connect('./database/book.db')
+    cursor=book_data.cursor()
+    try:
+        if user == cursor.execute("select user from book where id = "+str(book_id)).fetchone()[0]:
+            cursor.execute("delete from book where id = "+str(book_id))
+            book_data.commit()
+            cursor.close()
+            return 1
+    except:
+        cursor.close()
+        return 0
+    
+def clean_change(book_id,clean,user):
+    book_data=sqlite3.connect('./database/book.db')
+    cursor=book_data.cursor()
+    try:
+        if user == cursor.execute("select user from book where id = "+str(book_id)).fetchone()[0]:
+            cursor.execute("update book set clean = "+str(clean)+" where id = "+str(book_id))
+            book_data.commit()
+            cursor.close()
+            return 1
+    except:
+        cursor.close()
+        return 0
