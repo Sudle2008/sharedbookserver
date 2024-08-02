@@ -3,6 +3,7 @@
 from flask import Flask,render_template,make_response,request,redirect
 import source.user as database_user
 import source.book as database_book
+import traceback
 
 app = Flask(__name__)
 
@@ -48,6 +49,7 @@ def login():
                 raise Exception("UNKNOWN WRONG")
         except:
             warning="未知错误，请稍后重试或联系管理员"
+            traceback.print_exc()
     return render_template('login.html',warning=warning,acc=acc)
 
 @app.route("/register/",methods=["GET","POST"])
@@ -67,6 +69,7 @@ def register():
                 raise Exception("UNKNOWN WRONG")
         except:
             warning="未知错误，请稍后重试或联系管理员"
+            traceback.print_exc()
     return render_template('register.html',warning=warning,acc=acc)
 
 @app.route("/logout/")
@@ -120,6 +123,7 @@ def book_delete():
         else:
             raise Exception("UNKNOWN WRONG")
     except:
+        traceback.print_exc()
         return '''请重新<a href="/login/">登录</a>。'''
     
 @app.route("/book/clean/")
@@ -146,6 +150,7 @@ def book_clean():
         else:
             raise Exception("UNKNOWN WRONG")
     except:
+        traceback.print_exc()
         return '''请重新<a href="/login/">登录</a>。'''
 
 @app.route("/person/")

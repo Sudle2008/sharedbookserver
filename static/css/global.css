@@ -1,0 +1,11 @@
+﻿body {
+    background-image: url("/static/img/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    opacity: 0.8;
+}
+
+span.username {
+    font-weight:bold
+}

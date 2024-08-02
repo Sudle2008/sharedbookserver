@@ -6,20 +6,26 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <link href="/static/css/global.css" rel="stylesheet" type="text/css" />
+    <style>
+        td {
+            padding: 1px 5px;
+        }
+    </style>
 </head>
 <body>
     <header id="header"></header>
 
-    <p>您好，{{username}}，您可以在下方管理您上传的书</p>
+    <p>您好，<span class="username">{{username}}</span>，您可以在下方管理您上传的书</p>
     <p>注意：更改后需刷新界面</p><br />
 
-    <table>
+    <table border="1" cellspacing="2">
         <thead>
             <tr>
                 <th>书名</th>
                 <th>地点</th>
                 <th>是否消毒</th>
-                <th>操作</th>
+                <th colspan="2">操作</th>
             </tr>
         </thead>
         <tbody>

@@ -16,7 +16,10 @@ def add_user(name,password):
     print(user)
     if user:
         return 2
+    print("insert into user (name,password) values ('"+name+"','"+password+"')")
     cursor.execute("insert into user (name,password) values ('"+name+"','"+password+"')")
     cursor.close()
+    print(111)
     user_data.commit()
+    print(222)
     return 1
